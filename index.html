@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+ <html>
+ <head><title>Phishing Detector</title></head>
+ <body>
+   <h2>Phishing Detector</h2>
+   <form onsubmit="submitForm(event)">
+     <input id="url_length" placeholder="URL Length" type="number"><br>
+     <input id="dots" placeholder="Number of Dots" type="number"><br>
+     <input id="repeats" placeholder="Repeated Digits in URL" type="number"><br>
+     <input id="specials" placeholder="Special Characters in URL" type="number"><br>
+
+     <input id="entropy_url" placeholder="Entropy of URL" type="number" step="any"><br>
+
+     <input id="entropy_domain" placeholder="Entropy of Domain" type="number" step="any"><br>
+    <button type="submit">Check</button>
+  </form>
+   <p id="result"></p>
+
+   <script>
+    async function submitForm(e) {
+     e.preventDefault();
+      const data = {
+         url_length: parseInt(document.getElementById("url_length").value),
+         number_of_dots_in_url: parseInt(document.getElementById("dots").value),
+         having_repeated_digits_in_url: parseInt(document.getElementById("repeats").value),
+         number_of_special_char_in_url: parseInt(document.getElementById("specials").value),
+        entropy_of_url: parseFloat(document.getElementById("entropy_url").value),
+        entropy_of_domain: parseFloat(document.getElementById("entropy_domain").value)
+      };
+          const res = await fetch("https://your-api-url.onrender.com/predict", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(data)
+       });
+       const json = await res.json();
+       document.getElementById("result").innerText = "Prediction: " + json.result;
+     }
+   </script>
+ </body>
+ </html>
