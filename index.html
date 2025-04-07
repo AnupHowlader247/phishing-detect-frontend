@@ -27,7 +27,7 @@
         entropy_of_url: parseFloat(document.getElementById("entropy_url").value),
         entropy_of_domain: parseFloat(document.getElementById("entropy_domain").value)
       };
-          const res = await fetch("https://your-api-url.onrender.com/predict", {
+          const res = await fetch("https://phishing-detect-vmas.onrender.com/predict", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(data)
